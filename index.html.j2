@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monitoring {{ inventory_hostname }}</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background-color: #f4f4f4; }
+        .card { border: 1px solid #ccc; padding: 20px; display: inline-block; background: white; border-radius: 10px; margin-top: 50px; }
+        h1 { color: #2c3e50; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Serveur : {{ ansible_hostname }}</h1>
+        <p><strong>Adresse IP :</strong> {{ ansible_default_ipv4.address }}</p>
+        <p><strong>OS :</strong> {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+        <hr>
+        <p>Dernière mise à jour Ansible : {{ ansible_date_time.datetime }}</p>
+    </div>
+</body>
+</html>

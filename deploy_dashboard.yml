@@ -1,0 +1,23 @@
+---
+- name: Deploiement du Dashboard Dynamique
+  hosts: serveurs
+  become: yes
+
+  tasks:
+    - name: Installation de Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Generation de la page HTML a partir du template
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Redemarrage de Apache pour appliquer les changements
+      service:
+        name: apache2
+        state: restarted
