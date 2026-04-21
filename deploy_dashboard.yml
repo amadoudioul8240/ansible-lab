@@ -1,18 +1,15 @@
 ---
 - name: Deploiement du Dashboard Dynamique
   hosts: serveurs
-  become: yes
+  # become: yes  <-- On commente ou on supprime cette ligne !
   tasks:
     - name: Installation de Apache2
-      apt:
-        name: apache2
-        state: present
-        update_cache: yes
+      shell: sudo apt-get update && sudo apt-get install -y apache2
 
     - name: Generation de la page HTML
       template:
         src: index.html.j2
-        dest: /var/www/html/index.html
-        owner: www-data
-        group: www-data
-        mode: '0644'
+        dest: /tmp/index.html # On l'envoie d'abord dans un dossier neutre
+
+    - name: Deplacement du fichier avec sudo
+      shell: sudo mv /tmp/index.html /var/www/html/index.html
