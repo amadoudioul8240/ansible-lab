@@ -1,20 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Monitoring {{ inventory_hostname }}</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background-color: #f4f4f4; }
-        .card { border: 1px solid #ccc; padding: 20px; display: inline-block; background: white; border-radius: 10px; margin-top: 50px; }
-        h1 { color: #2c3e50; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #eef2f3; 
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .card { 
+            border: none;
+            padding: 30px; 
+            display: inline-block; 
+            background: white; 
+            border-radius: 15px; 
+            margin-top: 80px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+        h1 { color: #2c3e50; margin-bottom: 20px; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        p { font-size: 1.1em; line-height: 1.6em; }
+        .footer { font-size: 0.8em; color: #7f8c8d; margin-top: 20px; font-style: italic; }
+        .status-up { color: #27ae60; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="card">
         <h1>Serveur : {{ ansible_hostname }}</h1>
+        <p><strong>Statut :</strong> <span class="status-up">EN LIGNE</span></p>
         <p><strong>Adresse IP :</strong> {{ ansible_default_ipv4.address }}</p>
-        <p><strong>OS :</strong> {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+        <p><strong>Système :</strong> {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+        <p><strong>Architecture :</strong> {{ ansible_architecture }}</p>
         <hr>
-        <p>Dernière mise à jour Ansible : {{ ansible_date_time.datetime }}</p>
+        <p class="footer">
+            Généré par Ansible le {{ ansible_date_time.date }} à {{ ansible_date_time.time }}
+        </p>
     </div>
 </body>
 </html>
